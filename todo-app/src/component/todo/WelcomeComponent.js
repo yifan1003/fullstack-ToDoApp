@@ -6,6 +6,7 @@ class WelcomeComponent extends Component {
         super(props)
         this.retrieveWelcomeMessage = this.retrieveWelcomeMessage.bind(this)
         this.handleSuccessfulResponse = this.handleSuccessfulResponse.bind(this)
+        this.handlerError = this.handleError.bind(this)
         this.state = {
             welcomeMessage : ''
         }
@@ -15,8 +16,8 @@ class WelcomeComponent extends Component {
             <>
                 <h1> Welcome </h1>
                 <div className = "container" >
-                    Welcome{this.props.match.params.name}.
-                    You can manage your todos <Link to= "/todo"> here </Link>
+                    Welcome {this.props.match.params.name}.
+                    You can manage your todos <Link to= "/todos"> here </Link>
                 </div>
                 <div className="container">
                     <button onClick={this.retrieveWelcomeMessage} className="btn btn-success"> 
@@ -37,6 +38,7 @@ class WelcomeComponent extends Component {
 
         HelloWorldService.executeHelloWorldPathVariableService(this.props.match.params.name)
         .then(response => this.handleSuccessfulResponse(response))
+        .catch(error => this.handleError(error))
         
 
     }
@@ -45,6 +47,10 @@ class WelcomeComponent extends Component {
         console.log(response)
         this.setState({welcomeMessage: response.data.message})
         
+    }
+    handleError(error) {
+        console.log(error.response)
+        this.setState({welcomeMessage: error.response.data.message})
     }
 }
 
