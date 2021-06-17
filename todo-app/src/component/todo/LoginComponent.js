@@ -32,16 +32,29 @@ class LoginComponent extends Component {
     //     this.setState({password:event.target.value})
     // }
     loginClicked() {
-        //yifan, dummy
-        if (this.state.username === 'yifan' && this.state.password === 'dummy') {
-            AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password);
-            this.props.history.push(`/welcome/${this.state.username}`)
-            // this.setState({showSuceessMessage:true})
-            // this.setState({hasLoginFailed:false})
-        } else {
+        // hardcode 
+        // if (this.state.username === 'yifan' && this.state.password === 'dummy') {
+        //     AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password);
+        //     this.props.history.push(`/welcome/${this.state.username}`)
+        //     // this.setState({showSuceessMessage:true})
+        //     // this.setState({hasLoginFailed:false})
+        // } else {
+        //     this.setState({showSuceessMessage: false})
+        //     this.setState({hasLoginFailed: true})
+        // }
+
+        AuthenticationService
+        .executeBasicAuthenticationService(this.state.username, this.state.password)
+        .then(() => {
+                AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password);
+                this.props.history.push(`/welcome/${this.state.username}`)
+            }
+        ).catch (() =>{
             this.setState({showSuceessMessage: false})
             this.setState({hasLoginFailed: true})
         }
+
+        )
 
 
     }
