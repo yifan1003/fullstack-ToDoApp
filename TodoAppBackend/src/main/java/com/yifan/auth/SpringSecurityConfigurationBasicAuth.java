@@ -1,4 +1,4 @@
-package com.yifan.demo.auth;
+package com.yifan.auth;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;

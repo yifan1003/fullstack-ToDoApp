@@ -1,4 +1,4 @@
-package com.yifan.demo.auth;
+package com.yifan.auth;
 
 public class AuthenticationBean {
     private String message;
