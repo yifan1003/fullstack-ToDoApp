@@ -46,22 +46,15 @@ class TodoComponent extends Component {
             description: values.description,
             targetDate: values.targetDate
         }
-        if(this.state.id === -1) {
-           
-            TodoDataService.updateTodo(username,  todo).then(
-                () => {
-                    this.props.history.push('/todos')
-                }
-            )
+        if (this.state.id === -1) {
+            TodoDataService.createTodo(username, todo)
+                .then(() => this.props.history.push('/todos'))
         } else {
-            
-            TodoDataService.updateTodo(username, this.state.id, todo).then(
-                () => {
-                    this.props.history.push('/todos')
-                }
-            )
+            TodoDataService.updateTodo(username, this.state.id, todo)
+                .then(() => this.props.history.push('/todos'))
         }
-        
+
+        console.log(values);
     }
 
     render() {

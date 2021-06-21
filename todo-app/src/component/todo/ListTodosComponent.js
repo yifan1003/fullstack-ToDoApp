@@ -58,8 +58,6 @@ class ListTodosComponent extends Component {
     }
 
     addTodoClicked() {
-        
-       
         this.props.history.push(`/todos/-1`)
         
     }
